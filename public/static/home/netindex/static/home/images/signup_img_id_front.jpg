@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="392" height="247" viewBox="0 0 392 247">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #e8effc;
+      }
+
+      .cls-2 {
+        fill: #fff;
+      }
+
+      .cls-3 {
+        fill: #cfd5e1;
+      }
+    </style>
+  </defs>
+  <g id="signup_img_id_front" transform="translate(-169 -40)">
+    <rect id="矩形_2454" data-name="矩形 2454" class="cls-1" width="392" height="247" rx="4" transform="translate(169 40)"/>
+    <rect id="矩形_2456" data-name="矩形 2456" class="cls-2" width="112" height="6" rx="3" transform="translate(219 86)"/>
+    <rect id="矩形_2457" data-name="矩形 2457" class="cls-2" width="112" height="6" rx="3" transform="translate(219 130)"/>
+    <rect id="矩形_2460" data-name="矩形 2460" class="cls-2" width="112" height="6" rx="3" transform="translate(219 108)"/>
+    <rect id="矩形_2458" data-name="矩形 2458" class="cls-2" width="112" height="6" rx="3" transform="translate(219 152)"/>
+    <rect id="矩形_2459" data-name="矩形 2459" class="cls-2" width="302" height="6" rx="3" transform="translate(219 248)"/>
+    <path id="路径_4179" data-name="路径 4179" class="cls-3" d="M58.959,44a1.951,1.951,0,0,1,1.493,2.236c-.815,19.173-14.025,34.646-30.2,34.646C14.464,80.882,1.5,66.135.081,46.448c-.008-.1.294-2.395,1.96-2.395" transform="translate(508.253 202.442) rotate(180)"/>
+    <circle id="椭圆_1199" data-name="椭圆 1199" class="cls-3" cx="22" cy="22" r="22" transform="translate(456 82)"/>
+  </g>
+</svg>

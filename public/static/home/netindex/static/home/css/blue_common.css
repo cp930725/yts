@@ -1,0 +1,41 @@
+html,body{font-family: "微软雅黑";margin:0 auto;height: 100%;-webkit-user-select:none;-webkit-tap-highlight-color: rgba(0,0,0,0);-webkit-tap-highlight-color:transparent;-webkit-user-select:none;-webkit-touch-callout:none;-webkit-touch-callout:none;}
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td,hr,button,article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section {margin:0;padding:0;}
+
+h1,h2,h3,h4,h5,h6 {font-weight:normal;}
+textarea{resize:none;}
+/*取消按钮在inphone上的默认样式*/
+input[type=button]{-webkit-appearance:none;outline:none} 
+input::-webkit-input-placeholder{color:#F0F0F0;}
+textarea::-webkit-input-placeholder{color:#F0F0F0;}
+input::-webkit-input-speech-button {display:none}
+table {border-collapse:collapse;border-spacing:0;}
+th {text-align:inherit;}
+fieldset,img {border:none;}
+abbr,acronym {border:none;font-variant:normal;}
+del {text-decoration:line-through;}
+ol,ul {list-style:none;}
+ins,a,a:hover {text-decoration:none;}
+a:focus,*:focus {outline:none;}
+.clearfix:before,.clearfix:after {content:"";display:table;}
+.clearfix:after {clear:both;overflow:hidden;}
+.clearfix {zoom:1;}
+.clear {clear:both;display:block;font-size:0;height:0;line-height:0;overflow:hidden;}
+.hide {display:none;}
+.block {display:block;}
+.ofh{overflow: hidden;}
+/*布局*/
+.flex{display: flex;}
+.fl{float:left;}
+.fr{float:right;}
+.cb{clear:both;}
+.rel{position:relative;}
+.abs{position:absolute;}
+.fixed{position: fixed}
+.tac{text-align:center;}
+.tal{text-align:left;}
+.tar{text-align:right;}
+.dib{display:inline-block;}
+.vab{vertical-align:bottom;}
+.vam{vertical-align:middle;}
+.vat{vertical-align:top;}
+.bold{font-weight: bold;}

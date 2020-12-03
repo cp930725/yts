@@ -1,0 +1,387 @@
+<html><head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html">
+  
+  <title>商户后台管理系统</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <link rel="stylesheet" href="layui/css/layui.css" media="all">
+  <script>
+  /^http(s*):\/\//.test(location.href) || alert('请先部署到 localhost 下再访问');
+  </script>
+<link id="layuicss-layer" rel="stylesheet" href="static/home/css/blue_layer-3.1.1.css" media="all">
+<link id="layuicss-layuiAdmin" rel="stylesheet" href="static/home/css/blue_admin-1.2.120pro-1.css" media="all">
+</head>
+<body layadmin-themealias="default" class="layui-layout-body">
+  <div id="LAY_app" class="layadmin-tabspage-none">
+ <link rel="stylesheet" href="static/home/css/blue_login-1.2.120pro-1.css" media="all"> 
+<style type="text/css">
+  * {
+    box-sizing: border-box;
+  }
+  .identityFront {
+    width: 100%;
+    height: 247px;
+    position: relative;
+    box-sizing: border-box;
+    border: 1px solid #dcdcdc;
+  }
+  .identityFront input {
+    position: absolute;
+    display: block;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    z-index: 3;
+  }
+  .identityFront > img {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 2;
+  }
+  .identityFront .tips {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+  }
+  .identityFront .tips img {
+    width: 100%;
+    height: 100%;
+  }
+  .text-info {
+    font-size: 12px;
+    overflow: hidden;
+    color: #000000;
+    line-height: 20px;
+    margin: 8px 0 24px 0;
+  }
+  .text-info span {
+    float: left;
+  }
+  .text-info span:nth-child(2) {
+    float: right;
+    color: #CCCCCC;
+  }
+  .layadmin-user-register {
+    position: relative;
+     z-index: 1;
+     width: 100%;
+    height: 1280px;
+    background: #6a26e3 url(static/home/images/login_bg_1.jpg) no-repeat top center;
+  }
+  .part-2-bg {
+    position: relative;
+    /*top: -445px; */
+    width: 100%;
+    height: 1580px;
+    background: #6a26e3 url(static/home/images/login_bg_2.jpg) no-repeat bottom center;
+  }
+  .layadmin-user-login-header {
+    color: #fff;
+    padding-top: 150px;
+    padding-bottom: 40px;
+  }
+  .layadmin-user-login-header h2 {
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: 8px;
+    margin-bottom: 24px;
+  }
+  .layadmin-user-login-header h4 {
+    opacity:0.8;
+  }
+  .layadmin-user-login-body {
+    width: 100%;
+    /*height: 1990px;*/
+    background-color: #fff;
+    border-radius: 16px;
+    padding: 60px 102px 40px 100px;
+  }
+  .layadmin-user-login-main {
+    width: 594px;
+  }
+  .layui-input {
+    padding-left: 20px!important;
+    height: 48px;
+  } 
+  .layui-form-item {
+    margin-bottom: 32px;
+  }
+  .layui-btn {
+    height: 48px;
+  }
+  .layadmin-user-login-body .title {
+    font-size: 20px;
+    color: #6620DE;
+    font-weight: bold;
+    text-align: center;
+    line-height: 37px;
+    margin-bottom: 40px;
+  }
+  .layadmin-user-login-body .title .line {
+    width: 12px;
+    height: 4px;
+    background-color: #6620DE;
+    margin: 0 auto;
+  }
+  .confirm-btn {
+    background-color: #6B25E3;
+    border-radius: 24px; 
+  }
+  .agreement {
+    text-align: center;
+    color: #AAAAAA;
+    margin-top: 8px;
+    font-size: 12px;
+  }
+  .agreement a {
+    color: #6B25E3;
+  }
+  .success-alert-box {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 10;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: none;
+  }
+  .success-alert-box .content{
+    width: 594px;
+    height: 445px;
+    background-color: #fff;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -297px;
+    margin-top: -200px;
+    z-index: 10;
+    padding: 92px 100px 40px ;
+    border-radius: 16px;
+    text-align: center;
+  }
+  .success-alert-box .content .timeDown {
+    position: absolute;
+    height:95px;
+    font-size:72px;
+    font-weight:bold;
+    line-height:95px;
+    color:rgba(63,61,86,1);
+    opacity:1;
+    top: 32px;
+    left: 275px;
+  }
+  .success-alert-box .content .text {
+    font-size: 14px;
+    color: #000000;
+    font-weight:400;
+    line-height:24px;
+    color:rgba(0,0,0,1);
+    opacity:0.52;
+  }
+  .toLogin {
+    width:160px;
+    height:48px;
+    line-height: 48px;
+    background:rgba(107,37,227,1);
+    opacity:1;
+    border-radius:24px;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 400px;
+    cursor: pointer;
+    margin-top: 36px;
+  }
+  .hide{
+    display: none;
+  }
+
+   .layui-anim-upbit {
+    width: 392px;
+  }
+  dd > span.left {
+    display: inline-block;
+    width: 200px;
+    text-align: left;
+  }
+  dd > span.right {
+    display: inline-block;
+    width: 150px;
+    text-align: right;
+  }
+  .layui-form-select dl dd.layui-this {
+    background-color: #6b25e3;
+    border-radius: 3px;
+  }
+</style><div class="layadmin-user-register layadmin-user-display-show" id="LAY-user-login" style="display: none;">
+  <div class="layadmin-user-login-main">
+    <div class="layadmin-user-login-header">
+      <!-- <img src="../dist/style/res/login/logo_big.svg"> -->
+      <!-- <h2>星火支付</h2> -->
+      <h4>数字货币第三方支付平台</h4>
+    </div>
+    <form action="" method="post" enctype="multipart/form-data">
+    <div class="layadmin-user-login-body layui-form">
+      <div class="title">
+        <div>商户入驻</div>
+        <div class="line"></div>
+      </div>
+      <div class="layui-form-item">
+        <input style="" type="text" name="username" id="username" lay-verify="required" placeholder="姓名" class="layui-input">
+      </div>
+
+      <div class="layui-form-item">
+        <input type="text" name="nickname" maxlength="" id="nickname" lay-verify="required" placeholder="昵称" class="layui-input">
+      </div>
+      <div class="layui-form-item">
+        <input type="text" name="idcard" maxlength="" id="idcard" lay-verify="required" placeholder="身份证号" class="layui-input">
+      </div>
+		<div class="layui-form-item">
+        <input type="tel" name="mobile" maxlength="" id="mobile" lay-verify="required" placeholder="手机号" class="layui-input">
+      </div>
+      <div class="layui-form-item">
+        
+        <input type="password" name="password" maxlength="20" id="password" lay-verify="pass" placeholder="登录密码" class="layui-input">
+      </div>
+      <div class="layui-form-item">
+        
+        <input type="password" name="password_confirmation" maxlength="20" id="password_confirmation" lay-verify="required" placeholder="确认密码" class="layui-input">
+      </div>
+
+
+      <div class="layui-form-item">
+        <div class="identityFront">
+          <input type="file" name="image[]" value="" accept="image/*" class="inputArea" id="idCardPhoto">
+          <img src="" alt="" class="previewImg" id="sfzFrontImg">
+          <div class="tips">
+            <img src="static/home/images/signup_img_id_back.jpg">
+          </div>
+        </div>
+        <div class="text-info">
+          <span>上传身份证正面</span>
+          <span>上传图片须小于1M</span>
+        </div>
+        <div class="identityFront">
+          <input type="file" name="image[]" value="" accept="image/*" class="inputArea" id="idCardPhoto2">
+          <img src="" alt="" class="previewImg" id="sfzBackImg">
+          <div class="tips">
+            <img src="static/home/images/signup_img_id_front.jpg">
+          </div>
+        </div>
+        <div class="text-info">
+          <span>上传身份证反面</span>
+          <span>上传图片须小于1M</span>
+        </div>
+      </div> 
+
+      <div class="layui-form-item">
+       
+        <input type="text" name="invite_code" value="" id="LAY-user-login-invite" lay-verify="required" placeholder="邀请码" class="layui-input">
+        <span style="font-size: 12px; color: #666; position: relative; top: 5px;"></span>
+      </div>
+		<div class="layui-form-item">
+    <div class="layui-input-block" style="margin-left:0;">
+      <select name="reg_type" lay-verify="required" id="reg_type">
+        <option value='0'>请选择注册类型</option>
+                                	<option value='1'>商户</option>
+                                	<option value='2'>承兑商</option>
+                                	<option value='3'>代理商</option>
+      </select>
+    </div>
+  </div>
+
+      <div class="layui-form-item" style="margin-bottom: 0;">
+        <button class="layui-btn layui-btn-fluid confirm-btn" onclick="submitr();return false;">确 认</button>
+      </div>
+      
+    </div>
+    </form>
+  </div>
+  
+  <div class="layui-trans layadmin-user-login-footer">
+
+  </div>
+</div><div class="part-2-bg"></div><div class="success-alert-box">
+    <div class="content">
+      <p class="timeDown">5</p>
+      <div style="height: 172px; margin-bottom: 20px;">
+        <img src="dist/style/res/login/signup_img_finish.jpg">
+      </div>
+      <p class="text">恭喜你，已经成功提交商户入驻申请资料审核，请耐心等待，我们客服将在24小时内审核完毕，请注意查看手机短信通知</p>
+      <div class="toLogin layui-btn" id="toLogin">确认</div>
+    </div>
+<script src="static/home/js/jquery-2.2.4.min.js"></script>
+<script src="layui/layui.js"></script>
+<noscript src="/static/admin/js/layer/layer.js"></noscript>
+<script>
+$('.inputArea').change(function() {
+    var url=getObjectURL(this.files[0]);//获取本地的文件地址
+    if(url)
+    {
+        $(this).parent().find('img').attr('src',url);//修改图片路径
+    }else{
+        $(this).parent().find('img').attr('src',defaultimage);
+    }
+});
+
+//本地URL地址解析
+function getObjectURL(file) {
+//不存在选择路径补null
+    file=file?file:null;
+    if(file==null)
+    {
+        return null;
+    }
+    var url = null ;
+    if (window.createObjectURL!=undefined) { // basic
+        url = window.createObjectURL(file) ;
+    } else if (window.URL!=undefined) { // mozilla(firefox)
+        url = window.URL.createObjectURL(file) ;
+    } else if (window.webkitURL!=undefined) { // webkit or chrome
+        url = window.webkitURL.createObjectURL(file) ;
+    }
+    return url ;
+}
+function submitr(){
+	//alert(1);
+	var username = $('#username').val();
+	var idcard = $('#idcard').val();
+	var mobile = $('#mobile').val();
+	var password = $('#password').val();
+	var password_confirmation = $('#password_confirmation').val();
+	var reg_type = $('select[name="reg_type"]').val();
+	if(reg_type == 0){
+		//layer.tips('请选择注册类型', '#reg_type');return false;
+	}
+	if(!username){
+		 layer.tips('请输入姓名', '#username');return false;
+	}
+	if(!idcard){
+		layer.tips('请输入身份证号', '#idcard');return false;
+	}
+	if(!mobile){
+		layer.tips('请输入手机号', '#mobile');return false;
+	}
+	if(!password){
+		layer.tips('请输入登录密码', '#password');return false;
+	}
+	if(password != password_confirmation){
+		layer.tips('确认登录密码错误', '#password_confirmation');return false;
+	}
+	$('form').submit();
+}
+</script>
+<script>
+layui.use('form', function(){
+	  var form = layui.form;
+	  form.render();
+	});
+</script>
+</div>
+  <!-- <script src="static/home/js/layui.js"></script> -->
+
+<style id="LAY_layadmin_theme">.layui-side-menu,.layadmin-pagetabs .layui-tab-title li:after,.layadmin-pagetabs .layui-tab-title li.layui-this:after,.layui-layer-admin .layui-layer-title,.layadmin-side-shrink .layui-side-menu .layui-nav>.layui-nav-item>.layui-nav-child{background-color:#20222A !important;}.layui-nav-tree .layui-this,.layui-nav-tree .layui-this>a,.layui-nav-tree .layui-nav-child dd.layui-this,.layui-nav-tree .layui-nav-child dd.layui-this a{background-color:#009688 !important;}.layui-layout-admin .layui-logo{background-color:#20222A !important;}</style></div></body></html>

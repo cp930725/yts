@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0">
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+	<title>支付中心</title>
+	<style type="text/css">
+		* {
+			margin:0;
+			padding:0;
+		}
+		body { 
+            background: url('/static/home/payimg/bg.jpg') no-repeat center center fixed; 
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+        }
+    	#container {
+    		width:100%;
+    		height: auto;
+    		display:flex;
+    	}
+    	.active {
+            box-shadow: inset 0 0 5px 5px #00FF00;
+        }
+    	#main {
+			margin:1% 5%;
+			width: 90%;
+		}
+		#time-p {
+			color:#fff;
+			font-size:16px;
+		}
+		#pay-2-obj {
+			margin-top:1%;
+			color:#fff;
+			font-size:18px;
+		}
+		#info {
+			margin-top: 1%;
+			border-radius: 20px;
+			background-color: #3D7EC2;
+			height: 200px;
+		}
+		#info p {
+			height:50px;
+			line-height: 50px;
+			font-size: 18px;
+			color: #fff;
+			margin-left: 5%;
+		}
+		#info p span {
+			float:right;
+			margin-right: 5%;
+		}
+        #opt-pay {
+        	color: #fff;
+        	font-size: 18px;
+        	margin-top:1%;
+        	margin-bottom: 0.3%;
+        }
+		#pay-info {
+			width:100%;
+			height:530px;
+		}
+		.pay-nav {
+			width:30%;
+			height:100%;
+			float:left;
+		}
+		.pay-tag {
+			width:80%;
+			margin:3% auto 10%;
+			height:70px;
+			line-height:70px;
+			display:flex;
+			align-items:center;
+			justify-content: center;
+			background-color: #6699CC;
+			border: 1px solid #3D7EC2;
+			border-radius: 15px;
+		}
+		.pay-content {
+			width:70%;
+			height:auto;
+			max-height:100%;
+			float:right;
+		}
+		.payment-info {
+			width:95%;
+			margin:0 auto;
+			color:#fff;
+			border-radius: 20px;
+			background-color: #6699CC;
+		}
+		.pay-sigle {
+			margin:0 auto;
+			width:95%;
+			font-size:20px;
+			text-align:left;
+			display:flex;
+			flex-direction: row;
+			align-items:center;
+			padding-top:2%;
+		}
+		.payment-info p{
+			width:95%;
+			margin:1% auto 1%;
+			padding-bottom:1%;
+			font-size:18px;
+		}
+		.payment-info p span {
+			float:right;
+			margin-right:1%;
+		}
+		.payment-info p span font {
+			color:blue;
+		}
+		.payment-img {
+			width:50%;
+			margin:0 auto;
+			text-align:center;
+		}
+		.payment-img img {
+			max-width:250px;
+			max-height:300px;
+			padding-bottom:5%;
+		}
+		.payment-qrcode {
+			width:50%;
+			margin:1% auto;
+			text-align:center;
+		}
+		.payment-qrcode img {
+			max-width:200px;
+			max-height:200px;
+		}
+		.remark {
+			margin-top: 1%;
+			font-size: 20px;
+			font-family: SourceHanSansCN;
+			font-weight: 400;
+			color: #DEDEDE;
+			line-height: 25px;
+			height: 25px;
+		}
+	</style>
+</head>
+<body>
+	<div id="container">
+		<div id="main">
+			<p id="time-p">下单时间：<span>{$ctime}</span></p>
+			<p id="pay-2-obj">您正在向&nbsp;<span>{$truename}</span>&nbsp;购买&nbsp;<span>USDT</span></p>
+			<div id="info">
+				<p>
+					USDT数量
+					<span><strong>{$amount}</strong></span>
+				</p>
+				<p>
+					汇率
+					<span><strong>{$rate}</strong></span>
+				</p>
+				<p>
+					支付金额
+					<span><strong>{$money}</strong>&nbsp;元</span>
+				</p>
+				<p>
+					支付倒计时
+					<span><strong><em class="minute"></em>&nbsp;:<em class="second"></em></strong></span>
+				</p>
+			</div>
+			<P id="opt-pay">选择支付方式</P>
+			<div id="pay-info">
+				<div class="pay-nav">
+					<div class="pay-tag active" data-class="usdt" data-type="0">
+						<img src="/static/home/payimg/usdt.png" /><span style="margin-left:1%;color:#fff;font-size:20px;">USDT（五万以上）</span>
+					</div>
+					<div class="pay-tag" data-class="bank" data-type="1">
+						<img src="/static/home/payimg/yh.png" /><span style="margin-left:1%;color:#fff;font-size:20px;">银联（五万以内）</span>
+					</div>
+					<div class="pay-tag" data-class="zfb" data-type="2">
+						<img src="/static/home/payimg/zfb.png" /><span style="margin-left:1%x;color:#fff;font-size:20px;">支付宝（一万以内）</span>
+					</div>
+					<div class="pay-tag" data-class="wx" data-type="3">
+						<img src="/static/home/payimg/wx.png" /><span style="margin-left: 1%;color:#fff;font-size:20px;">微信（一万以内）</span>
+					</div>
+				</div>
+				<div class="pay-content">
+					<div class="payment-info usdt" style="display:black;">
+						<h2 class="pay-sigle">
+							<img src="/static/home/payimg/usdt.png" /><span style="margin-left: 1%;">USDT支付</span>
+						</h2>
+						
+						<div class="order-info">
+						    <p style="color:red; font-size:16px;font-weight：700;">手续费：火币USDT转账+3</p>
+							<div class="payment-qrcode" id="qrcode-img"></div>
+							<p style="width:60%;margin: 5px auto 4px;font-size:14px;font-weight:600;text-align: center;" id="usdt-address">{$usdte}</p>
+	                        <div style="width:60%;height:35px;margin:1px auto 0;color:blue;">
+	                            <div style="float:left;width:49%;height:35px;border:1px solid #000;text-align:center;line-height:35px;" onclick="download()">
+	                                <span style="color:#fff;font-weight: 600;">保存二维码</span>
+	                            </div>
+	                            <div style="float:right;width:49%;height:35px;border:1px solid #000;text-align:center;line-height:35px;" data-clipboard-target="#usdt-address" id="download-adr">
+	                                <span style="color:#fff;font-weight: 600;">复制地址</span>
+	                            </div>
+	                        </div>
+	                        <p style="width:60%;margin:0 auto;padding-top:1%;font-size:18px;font-weight:600;color:red;">
+	                            温馨提示：
+	                        </p>
+	                        <p style="width:60%;margin:5px auto 1%;font-size:16px;">
+	                            请勿向上述地址充值任何非 <font style="color: red; font-size: 18px;"><b>USDT-ERC20</b></font>资产，否则资产将不可找回。您充值至上述地址后，需要整个网络节点的确认，12次网络确认后到账。最小充值金额：1USDT,小于最小金额的充值将不会上账且无法退回。您的充值地址不会经常改变，可以重复充值。请务必确认客户端安全，防止信息被篡改或泄露。
+	                        </p>
+						</div>
+					</div>
+					<div class="payment-info bank" style="display:none;">
+						<h2 class="pay-sigle">
+							<img src="/static/home/payimg/yh.png" /><span style="margin-left:1%;">银联支付</span>
+						</h2>
+						<p>
+							订单金额：<span><strong id="bank-price">{$money}</strong>元&nbsp;<font data-clipboard-target="#bank-price" id="copy1">复制</font></span>
+						</p>
+						<p>
+							订单号：<span><strong id="bank-no">{$no}</strong>&nbsp;<font data-clipboard-target="#bank-no" id="copy2">复制</font></span>
+						</p>
+						<div class="order-info">
+							<p>
+								真实姓名：<span><strong id="bank-name">{$bank_name}</strong>&nbsp;<font data-clipboard-target="#bank-name" id="copy3">复制</font></span>
+							</p>
+							<p>
+								银行卡号：<span><strong id="bank-card">{$c_bank_card}</strong>&nbsp;<font data-clipboard-target="#bank-card" id="copy4">复制</font></span>
+							</p>
+							<p style="padding-bottom:2%;">
+								开户银行：<span><strong id="bank-bankname">{$bank}</strong>&nbsp;<font data-clipboard-target="#bank-bankname" id="copy5">复制</font></span>
+							</p>
+						</div>
+					</div>
+					<div class="payment-info zfb" style="display:none;">
+						<h2 class="pay-sigle">
+							<img src="/static/home/payimg/zfb.png" /><span style="margin-left:1%;">支付宝支付</span>
+						</h2>
+						<p>
+							订单金额：<span><strong id="zfb-price">{$money}</strong>元&nbsp;<font data-clipboard-target="#zfb-price" id="copy6">复制</font></span>
+						</p>
+						<p>
+							订单号：<span><strong id="zfb-no">{$no}</strong>&nbsp;<font data-clipboard-target="#zfb-no" id="copy7">复制</font></span>
+						</p>
+						<div class="order-info">
+							<p>
+								真实姓名：<span><strong id="zfb-name">{$zfb_name}</strong>&nbsp;<font data-clipboard-target="#zfb-name" id="copy8">复制</font></span>
+							</p>
+							<div class="payment-img">
+								<img src="{$c_alipay_img}">
+							</div>
+						</div>
+					</div>
+					<div class="payment-info wx" style="display:none;">
+						<h2 class="pay-sigle">
+							<img src="/static/home/payimg/wx.png" /><span style="margin-left:1%;">微信支付</span>
+						</h2>
+						<p>
+							订单金额：<span><strong id="wx-price">{$money}</strong>元&nbsp;<font data-clipboard-target="#wx-price" id="copy9">复制</font></span>
+						</p>
+						<p>
+							订单号：<span><strong id="wx-no">{$no}&nbsp;</strong><font data-clipboard-target="#wx-no" id="copy10">复制</font></span>
+						</p>
+						<div class="order-info">
+						    <p>
+								真实姓名：<span><strong id="zfb-name">{$wx_name}</strong>&nbsp;<font data-clipboard-target="#zfb-name" id="copy8">复制</font></span>
+							</p>
+							<div class="payment-img">
+								<img src="{$c_wechat_img}">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<p class="remark" style="color:#ff0000;margin-top:0;padding-bottom: 1%;">
+				<span style="float:right;">*付款成功后必须点击【我已付款完毕】！</span>
+			</p>
+			<style type="text/css">
+				#finish-pay {
+					text-align: center;
+					font-size: 28px;
+					font-weight: 600;
+					width:40%;
+					margin-left:50%;
+					height:50px;
+					line-height:50px;
+					color:#fff;
+					background: #00FF00;
+					border-radius: 10px;
+				}
+			</style>
+			<div id="finish-pay" onclick="uptrade()">我&nbsp;已&nbsp;付&nbsp;款&nbsp;完&nbsp;毕</div>
+			<p class="remark pay-warn">
+				<span style="margin-left: 30%;">如您未在<span id="time" style="color:#F80B0B;"><em class="minute"></em>分<em class="second"></em>秒</span>支付，订单会自动取消</span>
+				<span style="float: right;">需要向对方支付<span style="color:#36EF9B;">{$money}</span>CNY</span>
+			</p>
+			<p class="remark">
+				<span style="margin-left: 30%;">*为了有更好的放币效率，请您付完款在对话框中告诉卖家自己选用的哪种付款方式付款的！</span>
+			</p>
+		</div>
+	</div>
+</body>
+</html>
+<script type="text/javascript" src="__JS__/pay/jquery-2.2.4.min.js"></script>
+<script type="text/javascript" src="__JS__/pay/jquery.qrcode.min.js"></script>
+<script type="text/javascript" src="__JS__/pay/clipboard.min.js"></script>
+<script type="text/javascript">
+	$(function(){
+	    var ddNUm = {$money};
+		$(".pay-tag").on('click',function(){
+			$(this).siblings().removeClass('active');
+			$(this).addClass('active');
+			var paytype = $(this).data('type');
+			$('.payment-info').hide();
+			if(paytype == 0){
+				$('.usdt').show();
+			}else if(paytype == 1){
+				if(ddNUm > 50000){
+					alert('支付金额超过此付款方式最大限制');
+					$(this).removeClass('active');
+					$(this).prev().addClass('active');
+					$('.usdt').show();
+				}else{
+					$('.bank').show();
+				}
+			}else if(paytype == 2){
+				if(ddNUm > 50000){
+					alert('支付金额超过此付款方式最大限制');
+					$(this).removeClass('active');
+					$(this).prev().prev().addClass('active');
+					$('.usdt').show();
+				}else if(ddNUm > 10000){
+					alert('支付金额超过此付款方式最大限制');
+					$(this).removeClass('active');
+					$(this).prev().addClass('active');
+					$('.bank').show();
+				}else{
+					$('.zfb').show();
+				}
+			}else if(paytype == 3){
+				if(ddNUm > 50000){
+					alert('支付金额超过此付款方式最大限制');
+					$(this).removeClass('active');
+					$(this).prev().prev().prev().addClass('active');
+					$('.usdt').show();
+				}else if(ddNUm > 10000){
+					alert('支付金额超过此付款方式最大限制');
+					$(this).removeClass('active');
+					$(this).prev().prev().addClass('active');
+					$('.bank').show();
+				}else{
+					$('.wx').show();
+				}
+			}
+		});
+		//生成二维码
+		$("#qrcode-img").qrcode({
+			render:"canvas",
+			width:"200",
+			height:"200",
+			text:"{$usdte}",
+		});
+	});
+	function randomString(len){
+		//默认去掉了容易混淆的字符oOLl,9gq,Vv,Uu,I1
+		var chars = 'ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz2345678';
+		var tempLen = chars.length, tempStr='';
+		for(var i=0; i<len; ++i){
+			tempStr += chars.charAt(Math.floor(Math.random() * tempLen ));
+		}
+		return tempStr;
+	}
+	//二维码下载
+	function download(){
+		var data = $("canvas")[0].toDataURL().replace("image/png", "image/octet-stream;");　　
+		var filename = randomString(16) + ".png";
+		var save_link = document.createElementNS('http://www.w3.org/1999/xhtml', 'a');
+		save_link.href = data;
+		save_link.download = filename;
+		var event = document.createEvent('MouseEvents');
+		event.initMouseEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+		save_link.dispatchEvent(event);
+	}
+	//倒计时
+	var remaintime = {$remaintime};
+	if(remaintime > 0){
+		resetTime(remaintime);
+	}
+	function resetTime(time){
+		var timer = null;
+        var t = time;
+        var m = 0;
+        var s = 0;
+        m = Math.floor(t/60%60);
+        m<10&&(m='0'+m);
+        s = Math.floor(t%60);
+        function countDown(){
+            s--;
+            s<10&&(s='0'+s);
+            if(s.length>=3){
+                s = 59;
+                m = "0"+(Number(m)-1);
+            }
+            if(m.length>=3){
+                m='00';
+                s='00';
+                clearInterval(timer);
+            }
+            $('.minute').html(m);
+            $('.second').html(s);
+        }
+        timer = setInterval(countDown,1000);
+	}
+	//复制
+	var clip = new ClipboardJS('#download-adr');
+	clip.on('success',function(e){
+		alert('USDT钱包地址复制成功！');
+		clip.destroy();
+	});
+	var clipboard1 = new ClipboardJS('#copy1');
+    clipboard1.on('success',function(e){
+        alert('订单金额复制成功！');
+        clipboard1.destroy();
+    });
+    var clipboard2 = new ClipboardJS('#copy2');
+    clipboard2.on('success',function(e){
+        alert('订单号复制成功！');
+        clipboard2.destroy();
+    });
+    var clipboard3 = new ClipboardJS('#copy3');
+    clipboard3.on('success',function(e){
+        alert('真实姓名复制成功！');
+        clipboard3.destroy();
+    });
+    var clipboard4 = new ClipboardJS('#copy4');
+    clipboard4.on('success',function(e){
+        alert('银行卡号复制成功！');
+        clipboard4.destroy();
+    });
+    var clipboard5 = new ClipboardJS('#copy5');
+    clipboard5.on('success',function(e){
+        alert('开户银行复制成功！');
+        clipboard5.destroy();
+    });
+    var clipboard6 = new ClipboardJS('#copy6');
+    clipboard6.on('success',function(e){
+        alert('订单金额复制成功！');
+        clipboard6.destroy();
+    });
+    var clipboard7 = new ClipboardJS('#copy7');
+    clipboard7.on('success',function(e){
+        alert('订单号复制成功！');
+        clipboard7.destroy();
+    });
+    var clipboard8 = new ClipboardJS('#copy8');
+    clipboard8.on('success',function(e){
+        alert('真实姓名复制成功！');
+        clipboard8.destroy();
+    });
+    var clipboard9 = new ClipboardJS('#copy9');
+    clipboard9.on('success',function(e){
+        alert('订单金额复制成功！');
+        clipboard9.destroy();
+    });
+    var clipboard10 = new ClipboardJS('#copy10');
+    clipboard10.on('success',function(e){
+        alert('订单号复制成功！');
+        clipboard10.destroy();
+    });
+    var flag;
+    CheckOutTime();
+    function CheckOutTime(){
+        var id = {$id|default=0};
+    	$.ajax({
+    		url:'{:url("home/merchant/CheckOutTime")}',
+    		type:'post',
+    		data:{
+    			id:id
+    		},
+    		dataType:"json",
+    		success:function(data){
+    			if(data.code == 1){
+    				clearTimeout(flag);
+    				$("#finish-pay").hide();
+    				$(".pay-warn").hide();
+    				$('.order-info').html("<div class='sub-pay' style='width:80%;margin:10% auto;padding-bottom:10%;height:100%;text-align:center;'><span style='color:#ff0000;font-size:24px;border:1px solid #ff0000;'>订单已关闭</span></div>");
+    			}else{
+    				flag = setTimeout('CheckOutTime()',3000);
+    			}
+    		}
+    	})
+    }
+    function uptrade(){
+    	if(!confirm('确认付款后,请等待交易员放行,确认吗？')){
+            return false;
+        }
+        var appid = "{$appid|default=''}";
+        var id = {$id|default=0};
+        $.ajax({
+            url:'{:url("home/merchant/uptrade")}',
+            type:'post',
+            data:{
+                id:id,
+                appid:appid
+            },
+            dataType:"json",
+            success:function(data){
+                if(data.code == 1){
+                    alert('操作成功，请等待交易员释放');
+                    $("#finish-pay").hide();
+    				$(".pay-warn").hide();
+                    $('.order-info').html("<div class='sub-pay' style='width:80%;margin:10% auto;padding-bottom:10%;height:100%;text-align:center;'><span style='color:#ff0000;font-size:24px;border:1px solid #ff0000;'>请等待交易员放行</span></div>");
+                }else{
+                    alert(data.msg);
+                }
+            }
+        })
+    }
+</script>

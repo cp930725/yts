@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>支付中心</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="__JS__/pay/clipboard.min.js"></script>
+    <script src="__JS__/pay/qrcode.min.js"></script>
+    <style>
+        #app {
+            max-width: 1200px;
+            margin: 0 auto;
+            font-size: 18px;
+        }
+        .type {
+            display: flex;
+        }
+        .type>div {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            line-height: 32px;
+            padding: 4px 0;
+        }
+        .color>div:nth-child(3)>div:nth-child(2),
+        .color>div:nth-child(4)>div:nth-child(2) {
+            color: red;
+        }
+        .bgColor {
+            background-color: #d9d9d9;
+        }
+        .inline-block {
+            display: inline-block;
+        }
+        .flex {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+        .type-list {
+            width: 90%;
+            margin: 4px auto;
+        }
+        .borderB {
+            border-bottom: 1px solid #f3f3f3;
+            padding: 4px 0;
+        }
+        .spacing {
+            letter-spacing: 2px;
+        }
+        .zffs{
+            display: flex; 
+            justify-content: center;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 支付方式 -->
+        <div class="type">
+            <div v-for="(item,index) in data.fs" :key="index" :class="{bgColor:i==index}" @click="to(item.id)">
+                <img :src="item.img" alt="">
+                <div class="inline-block">{{item.title}}</div>
+            </div>
+        </div>
+        <div style="width: 100%;height: 6px;background-color: #f3f3f3;"></div>
+        <!-- 内容开始 -->
+        <div>
+            <!-- 价格 -->
+            <div class="type-list color">
+                <div class="flex borderB" v-for="(item,index) in data.price" :key="index" v-if="i!=0">
+                    <div class="spacing">{{item.title}}</div>
+                    <div class="spacing">{{item.num}}</div>
+                </div>
+            </div>
+            <div class="type-list color">
+                <div class="flex borderB" v-if="i==0">
+                    <div class="spacing">{{data.price[0].title}}</div>
+                    <div class="spacing">{{data.price[0].num}}</div>
+                </div>
+            </div>
+            <div style="width: 100%;height: 6px;background-color: #f3f3f3;" v-if="i!=0"></div>
+            <!-- 支付--> 
+            <div class="type-list">
+                <div v-if="i==0">
+                    <div>
+                        <div style="width:40%;margin:0 auto;">
+                            <p style="width:80%;height:30px;text-align:center;line-height:30px;display:none;" @click="getQrocde" v-trigger>生成二维码</p>
+                            <div id="qrcode" style="width:200px;height:200px;margin:10% auto 3%;"></div>
+                        </div>
+                        <p style="width:40%;margin: 5px auto 4px;font-size:14px;font-weight:600;text-align: center;" id="usdt-address">{{ buyer_usdt.usdte }}</p>
+                        <div style="width:40%;height:35px;margin:1px auto 0;color:blue;">
+                            <div style="float:left;width:49%;height:35px;border:1px solid #000;text-align:center;line-height:35px;" @click="downs">
+                                <span style="color:blue;">保存二维码</span>
+                            </div>
+                            <div style="float:right;width:49%;height:35px;border:1px solid #000;text-align:center;line-height:35px;" data-clipboard-target="#usdt-address" id="download-adr" @click="copyusdtadr">
+                                <span style="color:blue;">复制地址</span>
+                            </div>
+                        </div>
+                        <p style="width:40%;margin:5px auto;font-size:18p;font-weight:600;color:red;">
+                            温馨提示：
+                        </p>
+                        <p style="width:40%;margin:5px auto;font-size:16px;color:red;">
+                            此地址为测试地址，请勿充值。否则造成损失由本人承担！
+                        </p>
+                        <p style="width:40%;margin:5px auto 1px;font-size:16px;">
+                            请勿向上述地址充值任何非USDT资产，否则资产将不可找回。您充值至上述地址后，需要整个网络节点的确认，12次网络确认后到账。最小充值金额：1USDT,小于最小金额的充值将不会上账且无法退回。您的充值地址不会经常改变，可以重复充值。请务必确认客户端安全，防止信息被篡改或泄露。
+                        </p>
+                    </div>
+                </div>
+                <div>
+                    <!--银联 -->
+                    <div style="display: flex;line-height: 32px;margin-top: 10px;" v-if="i==1">
+                        <div style="display:flex;">
+                            <img src="/static/home/payimg/yh.png" alt="">
+                            <div class="inline-block spacing">银联支付</div>
+                        </div>
+                    </div>
+                    <!--支付宝 -->
+                    <div style="display: flex;line-height: 32px;margin-top: 10px;" v-if="i==2">
+                        <div style="display:flex;">
+                            <img src="/static/home/payimg/zfb.png" alt="">
+                            <div class="inline-block spacing">支付宝支付</div>
+                        </div>
+                    </div>
+                    <!--微信 -->
+                    <div style="display: flex;line-height: 32px;margin-top: 10px;" v-if="i==3">
+                        <div style="display:flex;">
+                            <img src="/static/home/payimg/wx.png" alt="">
+                            <div class="inline-block spacing">微信支付</div>
+                        </div>
+                    </div>
+                    <div v-for="(item,index) in data.zf" :key="index" v-if="index==i">
+                        <div class="flex" v-for="(item,index) in item" :key="index">
+                            <div class="spacing">{{item.title}}: <span :id="getinfo(index)">{{item.num}}</span> </div>
+                            <div class="spacing" :id="getcopyid(index)" :data-clipboard-target="getinfoid(index)" style="color: #596ff7;" @click="copytext(index)">复制</div>
+                        </div>
+                    </div>
+                     <!--支付宝二维码 -->
+                    <div class="zffs" v-if="i==2">
+                        <img :src="merchant_info.c_alipay_img" alt="" style="width:30%;height:40%;">
+                    </div>
+                     <!--微信二维码 -->
+                    <div class="zffs" v-if="i==3">
+                        <img :src="merchant_info.c_wechat_img" alt="" style="width:30%;height:40%;">
+                    </div>
+                </div>
+                <div style="display: flex;justify-content: center;margin: 8% 0;">
+                    <button v-if="confirm_pay==1" style="padding: 10px 60px;border: 0;border-radius: 5px;color: white; background-color: red;" class="spacing" @click="subform()">我已支付</button>
+                    <p v-if="close_order==0" style="padding: 10px 60px;border: 0;border-radius: 5px;color: white; background-color: red;" class="spacing">订单已关闭</p>
+                    <p v-if="wait_yes==0" style="padding: 10px 60px;border: 0;border-radius: 5px;color: white; background-color: red;" class="spacing">等待交易员放行</p>
+                </div>
+                <div v-if="confirm_pay_info==1" style="color:red;margin-top:-6%;" class="spacing">*付款成功后 必须点我已付款</div>
+            </div>
+        </div>
+
+    </div>
+<script>
+        var app = new Vue({
+            el: '#app',
+            data:{
+                data: {
+                    fs: [
+                        { img: '/static/home/payimg/usdt.png', title: 'USDT', id:'0' },
+                        { img: '/static/home/payimg/yh.png', title: '银联' ,id:'1' },
+                        { img: '/static/home/payimg/zfb.png', title: '支付宝',id:'2' },
+                        { img: '/static/home/payimg/wx.png', title: '微信',id:'3' },
+                    ],
+                    price: [
+                        { title: 'USDT数量', num: '' },
+                        { title: '汇率', num: '' },
+                        { title: '支付金额', num: '' },
+                        { title: '支付倒计时', num: '' },
+                    ],
+                    zf: [
+                        [],
+                        [
+                            { title: '订单金额', num: '' },
+                            { title: '订单号', num: ''},
+                            { title: '真实姓名', num: '' },
+                            { title: '银行卡号', num: '' },
+                            { title: '开户银行', num: '' }
+                        ],
+                        [
+                            { title: '订单金额', num: '' },
+                            { title: '订单号', num: '' },
+                            { title: '真实姓名', num: '' },
+                        ],
+                        [
+                            { title: '订单金额', num: '' },
+                            { title: '订单号', num: '' }
+                        ],
+                    ]
+                },
+                i:0,
+                k:0,
+                merchant_info:JSON.parse('{$merchant_info}'),
+                order_info:JSON.parse('{$order_info}'),
+                buyer_usdt:JSON.parse('{$buyer_usdt}'),
+                a:null,
+                b:null,
+                confirm_pay:1,
+                confirm_pay_info:1,
+                close_order:1,
+                wait_yes:1,
+            },
+            directives:{
+                trigger:{
+                    inserted(el,binging){
+                        el.click()
+                    }
+                }
+            },
+            methods:{
+                to(index){
+                    this.i=index;
+                    this.k=index;
+                    var ddNUm=Number(this.order_info.money);
+                    window.setTimeout(()=>{
+                    if(index==1){
+                        if(ddNUm>50000){
+                            window.alert('支付金额超过此付款方式最大限制');
+                            this.i=0;
+                            this.k=0;
+                        }
+                    }else if(index==2 || index==3){
+                        if(ddNUm>10000){
+                            window.alert('支付金额超过此付款方式最大限制');
+                            this.i=0;
+                            this.k=0;
+                        }
+                    }
+                    },1000)
+                },
+                set(){
+                    this.data.price[0].num = this.order_info.amount;
+                    this.data.price[1].num = this.order_info.rate;
+                    this.data.price[2].num = this.order_info.money + '元';
+                    this.data.price[3].num = Number(this.order_info.remaintime);
+                    this.djs=Number(this.order_info.remaintime);
+                    this.data.zf[1][0].num = this.order_info.money + '元';
+                    this.data.zf[1][1].num = this.order_info.no;
+                    this.data.zf[1][2].num = this.merchant_info.truename;
+                    this.data.zf[1][3].num = this.merchant_info.c_bank_card;
+                    this.data.zf[1][4].num = this.merchant_info.bank;
+                    this.data.zf[2][0].num = this.order_info.money + '元';
+                    this.data.zf[2][1].num = this.order_info.no;
+                    this.data.zf[2][2].num = this.merchant_info.truename;
+                    this.data.zf[3][0].num = this.order_info.money + '元';
+                    this.data.zf[3][1].num = this.order_info.no;
+                },
+                djss(){
+                    if(this.order_info.remaintime>0){
+                        this.djs--;
+                        var d=new Date(this.djs * 1000);
+                        var date=(d.getMinutes())+':'+(d.getSeconds());
+                        this.data.price[3].num = date;
+                        if(this.djs<=0){
+                            this.djs=this.order_info.remaintime;
+                            clearInterval(this.a)
+                        }
+                    }else{
+                        this.data.price[3].num = '0:0';
+                    } 
+                },
+                //生成二维码图片
+                getQrocde(){
+                    document.getElementById('qrcode').innerHTML=''
+                    this.$nextTick (function () {
+                        this.qrcode();
+                    })
+                },
+                qrcode () {
+                    let that = this;
+                    if(this.buyer_usdt.usdte.length > 0){
+                        let qrcode = new QRCode('qrcode', {
+                            width: 200,
+                            height: 200, 
+                            text:  this.buyer_usdt.usdte,
+                        });
+                    }
+                },
+                downs(){
+                    // //找到canvas标签
+                    let myCanvas = document.getElementById('qrcode').getElementsByTagName('canvas');
+                    let img=document.getElementById('qrcode').getElementsByTagName('img')
+                    // // //创建一个a标签节点
+                    let a= document.createElement("a")
+                    // //设置a标签的href属性（将canvas变成png图片）
+                    let imgURL=myCanvas[0].toDataURL('image/jpg');
+                    let ua = navigator.userAgent;
+                    if (ua.indexOf("Trident") != -1 && ua.indexOf("Windows") != -1) { // IE内核 并且  windows系统 情况下 才执行;
+                        var bstr = atob(imgURL.split(',')[1])
+                        var n = bstr.length
+                        var u8arr = new Uint8Array(n)
+                        while (n--) {
+                          u8arr[n] = bstr.charCodeAt(n)
+                        }
+                        var blob = new Blob([u8arr])
+                        window.navigator.msSaveOrOpenBlob(blob, '下载' + '.' + 'png')
+                    }else if(ua.indexOf("Firefox") > -1){ //火狐兼容下载
+                        let blob = this.base64ToBlob(imgURL); //new Blob([content]);
+                        let evt = document.createEvent("HTMLEvents");
+                        evt.initEvent("click", true, true);//initEvent 不加后两个参数在FF下会报错  事件类型，是否冒泡，是否阻止浏览器的默认行为
+                        a.download = ' ';//下载图片名称，如果填内容识别不到，下载为未知文件，所以我这里就不填为空
+                        a.href = URL.createObjectURL(blob);
+                        a.dispatchEvent(new MouseEvent('click', {bubbles: true, cancelable: true, view: window}));//兼容火狐
+                    }else{ //谷歌兼容下载
+                        img.src=myCanvas[0].toDataURL('image/jpg');
+                        // a.href = myCanvas[0].toDataURL('image/png').replace('image/png', 'image/octet-stream')
+                        a.href=img.src
+                        //设置下载文件的名字
+                        a.download = "下载"
+                         //点击
+                        a.click()
+                    }
+                },
+                //base64转blob
+                base64ToBlob(code) {
+                    let parts = code.split(';base64,');
+                    let contentType = parts[0].split(':')[1];
+                    let raw = window.atob(parts[1]);
+                    let rawLength = raw.length;
+                    let uInt8Array = new Uint8Array(rawLength);
+                    for (let i = 0; i < rawLength; ++i) {
+                    uInt8Array[i] = raw.charCodeAt(i);
+                    }
+                    return new Blob([uInt8Array], {type: contentType});
+                },
+                //我已支付提交
+                subform(){
+                    if(!confirm('确认付款后，请等待交易员放行，确认吗？')){
+                        return false;
+                    }
+                    var that=this;
+                    var order_id = 0;
+                    if(this.order_info.id != 0){
+                        order_id = this.order_info.id;
+                    }
+                    var appid = '';
+                    if(this.order_info.appid.length != 0){
+                        appid = this.order_info.appid;
+                    }
+                    var url = "{:url('home/merchant/uptrade')}";
+                    axios.post(url,'id='+order_id+'&appid='+appid).then(function(respose){
+                        if(respose.data.code == 1){
+                            alert('操作成功，请等待交易员释放')
+                            that.wait_yes = 0;
+                            that.confirm_pay = 0;
+                            that.confirm_pay_info = 0;
+                        }else{
+                            alert(respose.data.msg);
+                        }
+                    });
+                },
+                checkouttime(){
+                    var that=this;
+                    var order_id = 0;
+                    if(this.order_info.id != 0){
+                        order_id = this.order_info.id;
+                    }
+                    axios.post('{:url("home/merchant/CheckOutTime")}','id='+order_id).then(function(respose){
+                        if(respose.data.code == 1){
+                            that.close_order = 0;
+                            that.confirm_pay = 0;
+                            that.confirm_pay_info = 0;
+                            that.wait_yes = 1;
+                        }      
+                    })
+                },
+                getinfo(index){
+                    return "info_" + index;
+                },
+                getinfoid(index){
+                    return "#info_" + index;
+                },
+                getcopyid(index){
+                    return "copy" + index;
+                },
+                //复制
+                copyusdtadr(){
+                    var clip = new ClipboardJS("#download-adr");
+                    clip.on("success",function(e){
+                        alert('复制地址成功');
+                        clip.destroy();
+                    })
+                },
+                copytext(index){
+                    if(index == 0){
+                        var clipboard0 = new ClipboardJS("#copy0");
+                        clipboard0.on("success",function(e){
+                            alert('订单金额复制成功');
+                            clipboard0.destroy();
+                        });
+                    }else if(index == 1){
+                        var clipboard1 = new ClipboardJS("#copy1");
+                        clipboard1.on("success",function(e){
+                            alert('订单号复制成功');
+                            clipboard1.destroy();
+                        });
+                    }else if(index == 2){
+                        var clipboard2 = new ClipboardJS("#copy2");
+                        clipboard2.on("success",function(e){
+                            alert('真实姓名复制成功');
+                            clipboard2.destroy();
+                        });
+                    }else if(index == 3){
+                        var clipboard3 = new ClipboardJS("#copy3");
+                        clipboard3.on("success",function(e){
+                            alert('银行卡号复制成功');
+                            clipboard3.destroy();
+                        });
+                    }else if(index == 4){
+                        var clipboard4 = new ClipboardJS("#copy4");
+                        clipboard4.on("success",function(e){
+                            alert('开户银行复制成功');
+                            clipboard4.destroy();
+                        });
+                    }  
+                },
+            },
+            mounted(){
+                this.set()
+                this.a=setInterval(()=>{
+                    this.djss()
+                },1000)
+                this.b=setInterval(()=>{
+                    this.checkouttime()
+                },3000)
+            },
+            destroyed(){
+                clearInterval(this.b)
+            }
+        })
+    </script>
+</body>
+
+</html>

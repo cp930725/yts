@@ -1,0 +1,184 @@
+.coin-wrap .header {
+	width: 100%;
+	height: 600px;
+	background: #003766 url(../images/2nd_banner_bg.png) no-repeat top center; 
+}
+.mid-content {
+	width: 1200px;
+	margin: 0 auto;
+	text-align: center;
+	overflow: hidden;
+}
+.logo-model {
+	overflow: hidden;
+	margin: 0 auto;
+	width: 500px;
+	margin-top: 260px;
+}
+.coin-wrap .title {
+	font-size: 40px;
+	color: #fff;
+} 
+.coin-wrap .contentText {
+	font-size:16px;
+	font-weight:300;
+	line-height:21px;
+	color:rgba(255,255,255,1);
+	opacity:0.5;
+	margin-top: 16px;
+}
+.logo-btn {
+	margin-top: 32px;
+}
+.logo-btn span {
+	display: inline-block;
+	width:180px;
+	height:48px;
+	line-height: 44px;
+	border:2px solid rgba(255,255,255,0.3);
+	box-shadow:0px 4px 8px rgba(38,153,251,0.5);
+	border-radius:24px;
+	box-sizing: border-box;
+}
+.logo-btn span.special {
+	width:180px;
+	height:48px;
+	line-height: 48px;
+	background:rgba(38,153,251,1);
+	box-shadow:0px 4px 8px rgba(38,153,251,0.5);
+	opacity:1;
+	border-radius:24px;
+	border: none;
+	margin-right: 20px;
+}
+.logo-btn a {
+	color: #fff;
+}
+.coin-wrap .model-1 {
+	width: 100%;
+	height: 2160px;
+	background-color: #003766;
+}
+.coin-wrap .s-title {
+	font-size: 32px;
+	color: #fff;
+	margin: 80px auto;
+}
+.coin-wrap .model-2 {
+	width: 100%;
+	height: 1000px;
+	background: #005399 url(../images/coin_suit_bg.png) no-repeat center 278px; 
+}
+.model-2 .s-title {
+	margin: 100px auto 16px;
+}
+.model-2 .contentText {
+	width: 466px;
+	margin: 0 auto;
+}
+.coin-wrap .model-3 {
+	width:100%;
+	height: 770px;
+	background-color: #003766;
+	opacity:1;
+}
+.model-3 .s-title {
+	margin: 200px auto 100px;
+}
+.model-3 ul {
+	overflow: hidden;
+}
+.model-3 ul li {
+	float: left;
+	width: 228px;
+	font-size:16px;
+	font-weight:400;
+	line-height:21px;
+	color:rgba(255,255,255,1);
+	margin-right: 96px;
+}
+.model-3 ul li:last-child {
+	margin-right: 0;
+}
+.model-3 li p {
+	opacity:0.5;
+	margin-top: 24px;
+}
+.coin-wrap .model-4 {
+	height: 600px;
+	background-color: #006ecc;
+}
+.model-4 .s-title {
+	margin: 100px auto 16px;
+}
+.model-4 ul {
+	margin-top: 80px;
+}
+.model-4 ul li {
+	width: 180px;
+	margin-right: 75px;
+}
+.coin-wrap .model-5 {
+	background-color: #003766;
+	height: 665px;
+}
+.model-5 ul {
+	height: 246px;
+}
+.model-5 ul li {
+	margin-top: 20px;
+	width:282px;
+	height:226px;
+	background: #00457F;
+	border:3px solid #005299;
+	/*opacity:0.5;*/
+	border-radius:16px;
+	box-sizing: border-box;
+	margin-right: 24px;
+	cursor: pointer;
+	padding-top: 60px;
+	    transition: all 0.3s ease-out;
+}
+.model-5 ul li:hover {
+	background: #005399;
+	border:3px solid #006ECC;
+	opacity:1;
+	border-radius:16px;
+	margin-top: 0;
+}
+.model-5 ul li p {
+	margin-top: 32px;
+	font-size: 20px;
+	font-weight: bold;
+	opacity: 1;
+}
+.model-5 ul li:nth-child(1) {
+	color: rgba(0, 186, 235, 1);
+}
+.model-5 ul li:nth-child(2) {
+	color: rgba(0, 190, 151, 1);
+}
+.model-5 ul li:nth-child(3) {
+	color: rgba(0, 186, 193, 1);
+}
+.model-5 ul li:nth-child(4) {
+	color: rgba(0, 186, 193, 1);
+}
+.model-5 .s-title {
+	margin: 160px auto 60px;
+}
+.coin-wrap .model-6 {
+	width: 100%;
+	height: 560px;
+	background-color: #003766;
+}
+.model-6 .wrap {
+	width: 97%;
+	margin: 0 auto;
+	height: 100%;
+	background-color: #006ecc;
+	border-radius:32px 32px 0px 0px;
+}
+.model-6 .s-title {
+	margin: 100px auto 80px;
+}

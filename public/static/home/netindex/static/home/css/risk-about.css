@@ -1,0 +1,228 @@
+.risk-ctrl-wrap .header {
+	width: 100%;
+	height: 600px;
+	background: #003766 url(../images/2nd_banner_bg.png) no-repeat top center;
+	color: #FFFFFF;
+	overflow: hidden;
+}
+.risk-ctrl-wrap .mid-content {
+	width: 1200px;
+	height: 100%;
+	margin: 0 auto;
+	text-align: center;
+}
+.risk-ctrl-wrap .img-box {
+	overflow: hidden;
+	width: 310px;
+	height: 80px;
+	margin: 0 auto;
+	margin-top: 220px;
+}
+.risk-ctrl-wrap img {
+	float: left;
+}
+.header .main-title {
+	margin-top: 24px;
+	font-size: 40px;
+}
+.header .text {
+	margin-top: 16px;
+	font-size:16px;
+	font-weight:300;
+	line-height:21px;
+	color:rgba(255,255,255,1);
+	opacity:0.5;
+}
+.risk-ctrl-wrap .part1 {
+	width: 100%;
+	height: 848px;
+	overflow: hidden;
+	background-color: #003766;
+	opacity:1;
+}
+.risk-ctrl-wrap .common-title {
+	margin-top: 80px;
+	font-size: 32px;
+	color: #fff;
+	letter-spacing: 2px;
+	font-weight: normal;
+}
+.risk-ctrl-wrap .common-title .mark {
+	font-weight: bold;
+}
+.risk-ctrl-wrap .common-remark {
+	width: 578px;
+	font-size:16px;
+	font-weight:400;
+	line-height:21px;
+	color:rgba(255,255,255,1);
+	letter-spacing: 0.5px;
+	opacity:0.5;
+	margin: 0 auto;
+	margin-top: 16px;
+}
+.clearBox {
+	overflow: hidden;
+}
+.clearBox > div {
+	float: left;
+}
+.clearBox .left {
+	width: 588px;
+	margin-right: 160px;
+	margin-top: 90px;
+}
+.clearBox .left ul li {
+	margin-top: 24px;
+	float: left;
+	box-sizing: border-box;
+	width:282px;
+	height:120px;
+	line-height: 120px;
+	background-color: #00457F;
+	border:3px solid #005299;
+	border-radius:16px;
+	font-size:16px;
+	font-weight:400;
+	color:rgba(255,255,255,1);
+	padding-left: 112px;
+	text-align: left;
+	cursor: pointer;
+	/*transition: all 0.3s ease-out;*/
+	position: relative;
+}
+.clearBox .left ul li.odd {
+	margin-right: 24px;
+}
+.clearBox .left ul li:nth-child(1) {
+	background: url(../images/home_technologyt_icon1.png) no-repeat 32px center;
+}
+.clearBox .left ul li:nth-child(2) {
+	background: url(../images/home_technologyt_icon2.png) no-repeat 32px center;
+}
+.clearBox .left ul li:nth-child(3) {
+	background: url(../images/home_technologyt_icon3.png) no-repeat 32px center;
+}
+.clearBox .left ul li:nth-child(4) {
+	background: url(../images/home_technologyt_icon4.png) no-repeat 32px center;
+}
+.clearBox .left ul li:nth-child(5) {
+	background: url(../images/home_technologyt_icon5.png) no-repeat 32px center;
+}
+.clearBox .left ul li:nth-child(6) {
+	background: url(../images/home_technologyt_icon6.png) no-repeat 32px center;
+}
+.clearBox .left ul li.special {
+	opacity:1;
+	border-radius:16px;
+	background-color: #005399;
+	border:3px solid #006ECC;
+}
+.clearBox .right {
+	margin-top: 80px;
+}
+.risk-ctrl-wrap .part2 {
+	width: 100%;
+	height: 800px;
+	overflow: hidden;
+	background:rgba(0,83,153,1);
+	opacity:1;
+}
+.risk-ctrl-wrap .part2 img,
+.risk-ctrl-wrap .part4 img {
+	margin-top: 60px;
+}
+.part3 {
+	width: 100%;
+	height: 2500px;
+	background-color: #003766;
+	overflow: hidden;
+}
+.part3 li {
+	overflow: hidden;
+	margin-top: 160px;
+}
+.part3 li > div {
+	float: left;
+}
+.part3 li .common-remark {
+	width: 100%;
+}
+.part3 li:nth-child(1) .right {
+	width: 500px;
+	margin-top: 60px;
+	margin-left: 170px;
+}
+
+.part3 li:nth-child(2) .left {
+	width: 566px;
+	margin-top: 110px;
+	margin-right: 146px;
+}
+.part3 li:nth-child(3) .right {
+	width: 432px;
+	margin-top: 70px;
+	margin-left: 204px;
+}
+.part3 li:nth-child(4) .left {
+	width: 516px;
+	margin-top: 80px;
+	margin-right: 160px;
+}
+.part4 {
+	width: 100%;
+	height: 1000px;
+	background-color: #006ecc;
+	opacity:1;
+	overflow: hidden;
+}
+.about-us .header {
+	height: 1000px;
+}
+.about-us .part3 {
+	background-color: #005399;
+	height: 2760px;
+	overflow: inherit;
+}
+.about-us .part3 ul {
+	position: relative;
+	top: -720px;
+	overflow: hidden;
+}
+.about-us li .common-remark {
+	width:486px;
+	font-size:16px;
+	font-weight:400;
+	line-height:24px;
+	color:rgba(255,255,255,1);
+	opacity:0.5;
+}
+.about-us li:nth-child(1) .common-remark {
+	margin-top: 40px;
+}
+.about-us .part3 li.odd .right {
+	width: 486px;
+	margin-top: 160px;
+	margin-left: 228px;
+}
+
+.about-us .part3 li.even .left {
+	width: 486px;
+	margin-top: 160px;
+	margin-right: 228px;
+}
+.about-us .part3 li:nth-child(2) .left {
+	margin-top: 50px;
+}
+.about-us .part3 li:nth-child(3) .right {
+	width: 486px;
+	margin-top: 50px;
+}
+.about-us .part3 li:nth-child(4) .left {
+	margin-top: 40px;
+}
+.about-us .part3 li:nth-child(5) .right {
+	width: 486px;
+	margin-top: 50px;
+	margin-left: 160px;
+}

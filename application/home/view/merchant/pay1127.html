@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0">
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>在线购买USDT进行支付</title>
+    <link rel="stylesheet" type="text/css" href="__CSS__/pay/base.css">
+    <link rel="stylesheet" type="text/css" href="__CSS__/pay/save.css">
+    <link rel="stylesheet" type="text/css" href="__CSS__/pay/success.css">
+    <style type="text/css">
+    #index {
+        max-width: 750px;
+        width: 100%;
+        display: block;
+        min-height: 100%;
+        margin: 0 auto;
+    }
+
+    #box1 {
+        margin: 0 auto;
+    }
+    
+    .active{
+    		border:0.03rem solid #d02f2f;
+    	}
+    	.foot-pay{
+    		
+    		width: 25%;
+    		font-size: 14px;
+    		
+    		margin-left: 10px;
+    		float: left;
+    		display: flex;
+    		flex-direction: row;
+    		align-items: center;
+    	
+    	}
+    	.body_gmsl{
+    		font-size: 12px;
+    		height: 40px;
+    		line-height: 40px;
+    		
+    		margin:0 auto ;
+    		display: flex;
+    		justify-content:space-between;
+    	}
+    	.open{
+    		
+		    font-size: 20px;
+		    color: #fff;
+		    text-align: center;
+		    margin: 0 auto;
+		    background: #02a6ea;
+		    height: 30px;
+		    line-height: 30px;
+		    margin-top: 30px;
+    	}
+    </style>
+</head>
+
+<body>
+    <div id="index">
+
+
+
+      
+        <div class="container">
+           
+            <div id="info_box">
+                <div>
+                    <div id="state_box2" style="display: block;">
+                        <header>
+                            <div class="head_box pay">
+								{volist name="payarr" id="vo"}
+								{if condition="$money gt 10000"}
+								<!--	{eq name="vo" value="bank"}
+									<div class="foot-pay {eq name='key' value='0'}active{/eq}" data-class='bank' data-type="2">
+										<img src="__IMG__/bank.png"/><span style="margin-left:0.05rem">银联卡</span>
+									</div>
+									{/eq}-->
+								{else /}
+								{eq name="vo" value="bank"}
+								<div class="foot-pay {eq name='key' value='0'}active{/eq}" data-class='bank' data-type="2">
+									<img src="__IMG__/bank.png"/><span style="margin-left:0.05rem">银联</span>
+								</div>
+								{/eq}
+								{eq name="vo" value="bank2"}
+								<div class="foot-pay {eq name='key' value='0'}active{/eq}" data-class='bank2' data-type="7">
+									<img src="__IMG__/alipay.png"/><span style="margin-left:0.05rem">转卡</span>
+								</div>
+								{/eq}
+								{eq name="vo" value="zfb"}
+								<div class="foot-pay {eq name='key' value='0'}active{/eq}" data-class='alipay' data-type="{$vo}">
+									<img src="__IMG__/alipay.png"/><span style="margin-left:0.05rem">扫码</span>
+								</div>
+								{/eq}
+								{eq name="vo" value="zfbh5"}
+								<div class="foot-pay {eq name='key' value='0'}active{/eq}" data-class='alipayh5' data-type="{$vo}">
+									<img src="__IMG__/alipay.png"/><span style="margin-left:0.05rem">h5</span>
+								</div>
+								{/eq}
+								{eq name="vo" value="wx"}
+								<div class="foot-pay {eq name='key' value='0'}active{/eq}" data-class='wechatpay' data-type="4">
+									<img src="__IMG__/wechatpay.png"/><span style="margin-left:0.05rem">扫码</span>
+								</div>
+								{/eq}
+								{eq name="vo" value="ysf"}
+								<div class="foot-pay {eq name='key' value='0'}active{/eq}" data-class='ysf' data-type="4">
+									<img  src="__IMG__/yun.png"/><span style="margin-left:0.05rem">扫码</span>
+								</div>
+								{/eq}
+								{eq name="vo" value="dmfh5"}
+								<div class="foot-pay {eq name='key' value='0'}active{/eq}" data-class='dmfh5' data-type="6">
+									<img  src="__IMG__/alipay.png"/><span style="margin-left:0.05rem">当面付</span>
+								</div>
+								{/eq}
+								{/if}
+								{/volist}
+                            </div>
+                        </header>
+                        <div class="bottom_div">
+                            <div style="display: flex;justify-content: center;" id="fkDiv">
+                            	{gt name='remaintime' value='0'}
+                                <!--<button class="fk_button"  onclick="uptrade()">我已付款 <span id="money2">{$money}</span>元</button>-->
+								{else/}
+								<button class="fk_button1" >订单已关闭</button>
+								{/gt}
+                            </div>
+                        </div>
+                        <div class="top_info">
+                            <span class="left" id="orderState">USDT数量：{$amount}</span>
+                            <span class="right" style="margin-top:13px;">支付倒计时: <em id='minute'>00</em>:<em id='second'>00</em></span>
+	                            
+                            <div class="clear"></div>
+                        </div>
+                        <div id="box">
+                            <p class="red_p">     付款成功后 必须点 【我已付款】<span class="red_arrow"></span></p>
+                            {gt name='remaintime' value='0'}
+	                           <button style="height: 44px;font-size: 22px;margin-top: 30px;margin-right: 8px;width: 270px;border-radius: 3px;cursor: pointer;color: #FFF;background: linear-gradient(270deg,#f50606,#f50606);" class="fk_button"  onclick="uptrade()">我已付款 <span id="money2">{$money}</span>元</button>
+							{/gt}
+                            <div class="zf_p" :class="pay_type==&#39;banktrans&#39;?&#39;wid_p&#39;:&#39;&#39;">
+                                <div>
+                                    <div class="clear"></div>
+                                </div>
+                                <div>
+                                    <div id="box1">
+                                       
+                                        <p class="money" style="color: black;">
+                                        	 <span>请付 </span>
+                                          <span>
+                                        <span id="money">{$money}</span> 元 
+                                         <button class="copy_button2" data-clipboard-target="#money" id="copy9" style="background: transparent;margin-left:10px">复制</button>
+                                       </span>
+                                       </p>
+                                       
+                                        <p class="order" style="text-align: center">
+                                            <span>订单号： </span>
+                                            <span>
+                                                <span id="order_id">{$no}</span>
+                                                <button class="copy_button2" data-clipboard-target="#order_id" id="copy5" style="background: transparent;margin-left:10px">复制</button>
+                                            </span>
+                                        </p>
+                                        <div class="ewm_box">
+                                            {volist name="payarr" id="vo"}
+											{eq name="vo" value="zfb"}
+												{gt name='remaintime' value='0'}
+												<div class="pay_data alipay {gt name="key" value="0"}hide{/gt}">
+													
+													
+													<img src="/uploads/face/{$merchant.c_alipay_img}" style='height: 100%;width: 100%;'/>
+													
+												</div>
+												{else/}
+													<div class="pay_data alipay {gt name="key" value="0"}hide{/gt}" style="text-align:center">
+													订单已关闭！
+													</div>
+												{/gt}
+											{/eq}
+											{eq name="vo" value="zfbh5"}
+												{gt name='remaintime' value='0'}
+												<div class="pay_data alipayh5 {gt name="key" value="0"}hide{/gt}">
+													
+													
+													<img src="https://api.uomg.com/api/qrcode?url={$merchant.c_alipayh5_url}" style='height: 100%;width: 100%;'/>
+													
+												</div>
+												{else/}
+													<div class="pay_data alipayh5 {gt name="key" value="0"}hide{/gt}" style="text-align:center">
+													订单已关闭！
+													</div>
+												{/gt}
+											{/eq}
+							{eq name="vo" value="bank2"}
+										{gt name='remaintime' value='0'}
+										<div class="pay_data bank2 {gt name="key" value="0"}hide{/gt}">
+										<div class="body_gmsl">
+											<div style="color:#444b54;">真实姓名:</div>
+											<div id="copy2" data-clipboard-target="#name">{gt name='remaintime' value='0'}<font id="name">{$merchant.truename2}</font><span style="margin-left:0.1rem;color:#02a6ea" id="fz1">复制</span>{/gt}</div>
+										</div>
+										<div class="body_gmsl">
+											<div style="color:#444b54;">银行卡号:</div>
+											<div  id="copy3" data-clipboard-target="#bankno">{gt name='remaintime' value='0'}<font id="bankno">{$merchant.c_bank_card2}</font><span style="margin-left:0.1rem;color:#02a6ea" id="fz2">复制</span>{/gt}</div>
+										</div>
+										<div class="body_gmsl">
+											<div style="color:#444b54;">开户银行:</div>
+											<div  id="copy4" data-clipboard-target="#bank">{gt name='remaintime' value='0'}<font id="bank">{$merchant.bank2}</font><span style="margin-left:0.1rem;color:#02a6ea" id="fz3">复制</span>{/gt}</div>
+										</div>
+										<img src="http://socket.hzhifu.cn/Api/qrcodes?text={$domain}/merchant/bank.html?id={$id}&appid={$appid}&type=2" style='height: 100%;width: 100%;'/>
+										<div style="color:#fd071c; font-size: 24px;">请用支付宝扫码支付</div>
+									</div>
+									{else/}
+									<div class="pay_data bank2 {gt name="key" value="0"}hide{/gt}" style="text-align:center">
+									订单已关闭！
+								</div>
+								{/gt}
+							{/eq}
+
+
+											{eq name="vo" value="bank"}
+												{gt name='remaintime' value='0'}
+												<div class="pay_data bank {gt name="key" value="0"}hide{/gt}">
+													<div class="body_gmsl">
+														<div style="color:#444b54;">真实姓名:</div>
+														<div id="copy2" data-clipboard-target="#name">{gt name='remaintime' value='0'}<font id="name">{$merchant.truename}</font><span style="margin-left:0.1rem;color:#02a6ea" id="fz1">复制</span>{/gt}</div>
+													</div>
+													<div class="body_gmsl">
+														<div style="color:#444b54;">银行卡号:</div>
+														<div  id="copy3" data-clipboard-target="#bankno">{gt name='remaintime' value='0'}<font id="bankno">{$merchant.c_bank_card}</font><span style="margin-left:0.1rem;color:#02a6ea" id="fz2">复制</span>{/gt}</div>
+													</div>
+													<div class="body_gmsl">
+														<div style="color:#444b54;">开户银行:</div>
+														<div  id="copy4" data-clipboard-target="#bank">{gt name='remaintime' value='0'}<font id="bank">{$merchant.bank}</font><span style="margin-left:0.1rem;color:#02a6ea" id="fz3">复制</span>{/gt}</div>
+													</div>
+													<!--	<img src="http://socket.hzhifu.cn/Api/qrcodes?text={$domain}/merchant/bank.html?id={$id}&appid={$appid}&type=1" style='height: 100%;width: 100%;'/>
+
+														<div style="color:#fd071c; font-size: 24px;">请用支付宝扫码支付</div>-->
+
+
+												</div>
+												{else/}
+													<div class="pay_data bank {gt name="key" value="0"}hide{/gt}" style="text-align:center">
+													订单已关闭！
+													</div>
+												{/gt}
+
+											{/eq}
+
+											{eq name="vo" value="wx"}
+												{gt name='remaintime' value='0'}
+												<div class="pay_data wechatpay {gt name="key" value="0"}hide{/gt}">
+													
+													
+													<img src="/uploads/face/{$merchant.c_wechat_img}" style='height: 100%;width: 100%;'/>
+													
+												</div>
+												{else/}
+													<div class="pay_data wechatpay {gt name="key" value="0"}hide{/gt}" style="text-align:center">
+													订单已关闭！
+													</div>
+												{/gt}
+											{/eq}
+										
+											{eq name="vo" value="ysf"}
+												{gt name='remaintime' value='0'}
+												<div class="pay_data ysf {gt name="key" value="0"}hide{/gt}">
+												
+													
+													<img src="/uploads/face/{$merchant.c_ysf_img}" style='height: 100%;width: 100%;'/>
+													
+												</div>
+												{else/}
+													<div class="pay_data ysf {gt name="key" value="0"}hide{/gt}" style="text-align:center">
+													订单已关闭！
+													</div>
+												{/gt}
+											{/eq}
+
+	{eq name="vo" value="dmfh5"}
+	{gt name='remaintime' value='0'}
+	<div class="pay_data dmfh5 {gt name="key" value="0"}hide{/gt}">
+	<img src="{$merchant.dmf_qr_code}" style='height: 100%;width: 100%;'/>
+	</div>
+	{else/}
+	<div class="pay_data dmfh5 {gt name="key" value="0"}hide{/gt}" style="text-align:center">
+	订单已关闭！
+	</div>
+	{/gt}
+	{/eq}
+											{/volist}
+                                            
+                                        </div>
+
+                                           
+                                            
+                                        
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="__JS__/pay/jquery-2.2.4.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="__JS__/pay/clipboard.min.js"></script>
+    <script type="text/javascript" charset="utf-8">
+    
+	var copy1T;
+	var copy2T;
+	var copy3T;
+	var copy4T;
+	var copy5T;
+	var copy6T;
+	var copy7T;
+	var copy8T;
+	var clipboard1 = new ClipboardJS('#copy1');
+		clipboard1.on('success', function(e) {
+			alert('订单号复制成功!');
+			
+			clearTimeout(copy1T);
+			copy1T = setTimeout(function() {
+				$("#fz").html("复制")
+			}, 2000)
+			e.clearSelection()
+		});
+		var clipboard2 = new ClipboardJS('#copy2');
+		clipboard2.on('success', function(e) {
+			alert('收款人姓名复制成功!');
+			
+			clearTimeout(copy2T);
+			copy2T = setTimeout(function() {
+				$("#fz1").html("复制")
+			}, 2000)
+			e.clearSelection()
+		});
+		var clipboard3 = new ClipboardJS('#copy3');
+		clipboard3.on('success', function(e) {
+			alert('银行账号复制成功!');
+			
+			clearTimeout(copy3T);
+			copy3T = setTimeout(function() {
+				$("#fz2").html("复制")
+			}, 2000)
+			e.clearSelection()
+		});
+		var clipboard4 = new ClipboardJS('#copy4');
+		clipboard4.on('success', function(e) {
+			alert('开户行复制成功!');
+			
+			clearTimeout(copy4T);
+			copy4T = setTimeout(function() {
+				$("#fz3").html("复制")
+			}, 2000)
+			e.clearSelection()
+		});
+		var clipboard5 = new ClipboardJS('#copy5');
+		clipboard5.on('success', function(e) {
+			alert('订单号复制成功!');
+			
+		
+			e.clearSelection()
+		});
+		var clipboard6 = new ClipboardJS('#copy6');
+		clipboard6.on('success', function(e) {
+			alert('收款人姓名复制成功!');
+			
+		
+			e.clearSelection()
+		});
+		var clipboard7 = new ClipboardJS('#copy7');
+		clipboard7.on('success', function(e) {
+			alert('银行账号复制成功!');
+			
+		
+			e.clearSelection()
+		});
+		var clipboard8 = new ClipboardJS('#copy8');
+		clipboard8.on('success', function(e) {
+			alert('开户行复制成功!');
+			
+		
+			e.clearSelection()
+		});
+		var clipboard9 = new ClipboardJS('#copy9');
+		clipboard9.on('success', function(e) {
+			alert('金额复制成功!');
+			
+		
+			e.clearSelection()
+		});
+var flag;
+$('.usdt').mouseover(function(){
+	$('.descusdt').show();
+});
+$('.usdt').mouseout(function(){
+	$('.descusdt').hide();
+});
+$(".pay div").click(function(){
+	var type = $(this).attr('data-type');
+	var showclass = $(this).attr('data-class');
+	$('input[name="paymethod"]').val(type);
+	$('.foot-pay').removeClass('active');
+	$(this).addClass('active');
+	$('.pay_data').hide();
+	$('.'+showclass).show();
+})
+var remaintime = {$remaintime|default=0};
+if(remaintime > 0){
+	resetTime(remaintime);
+}
+CheckOutTime();
+function resetTime(time){
+  var timer=null;
+  var t=time;
+  var m=0;
+  var s=0;
+  m=Math.floor(t/60%60);
+  m<10&&(m='0'+m);
+  s=Math.floor(t%60);
+  function countDown(){
+   s--;
+   s<10&&(s='0'+s);
+   if(s.length>=3){
+    s=59;
+    m="0"+(Number(m)-1);
+   }
+   if(m.length>=3){
+    m='00';
+    s='00';
+    clearInterval(timer);
+   }
+   $('#minute').html(m);
+   $('#second').html(s);
+   //console.log(m+"分钟"+s+"秒");
+  }
+  timer=setInterval(countDown,1000);
+}
+function CheckOutTime(){
+	var id = {$id|default=0};
+	$.post('{:url("home/merchant/CheckOutTime")}', {id:id}, function(data){
+		if(data.code === 1){
+			clearTimeout(flag);
+			$('.payma img').attr('src', '__IMG__/outtime.png');
+			$('.bankinfo').hide();
+			$('.infodetail p span').html('订单已关闭');
+			$('.paybutton').attr('disabled', true);
+		}else{
+			flag=setTimeout('CheckOutTime()',3000);
+		}
+	})
+
+}
+function uptrade(){
+	if(!confirm('确认付款后,请等待交易员放行,确认吗？')){
+		return false;
+	}
+	var appid = "{$appid|default=''}";
+	var id = {$id|default=0};
+	$.post('{:url("home/merchant/uptrade")}', {id:id, appid:appid}, function(data){
+		if(data.code == 1){
+			alert('操作成功，请等待交易员释放');window.location.href=data.msg;
+		}else{
+			alert(data.msg);
+		}
+	})
+}
+    
+    </script>
+</body>
+
+</html>
